@@ -120,6 +120,13 @@ ExitScript() {
         for deviceID, vol in originalVolumes {
             VA_SetMasterVolume(vol, "", deviceID)
         }
+
+        ; Unmute all capture devices
+        devices := VA_GetDeviceList("capture")
+        for index, deviceID in devices {
+            VA_SetMasterMute(false, deviceID)  ; Set mute state to off
+        }
+
         SoundPlay, % unmuteSfx
     }
     Gui, Overlay: Destroy
